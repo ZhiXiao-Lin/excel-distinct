@@ -31,12 +31,17 @@ export default function IndexPage() {
       ws.eachRow((row, index) => {
         if (index === 1) {
           row.eachCell((cell) => {
-            columns.push(cell.value?.toString().trim() ?? '');
+            columns.push(cell.value?.toString().trim() ?? ' ');
           });
         } else {
           const cells: any[] = [];
-          row.eachCell((cell) => {
-            cells.push(cell.value?.toString().trim() ?? '');
+          columns.forEach((c, i) => {
+            cells.push(
+              row
+                .getCell(i + 1)
+                .value?.toString()
+                .trim() ?? ' ',
+            );
           });
           rows.push(cells);
         }
